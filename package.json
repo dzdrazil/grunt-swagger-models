@@ -1,0 +1,45 @@
+{
+  "name": "grunt-swagger-models",
+  "description": "A generator task to create an API Resource, Collection and Model class for entities from a swagger file",
+  "version": "0.1.0",
+  "homepage": "https://github.com/dzdra_000/grunt-swagger-models",
+  "author": {
+    "name": "dzdrazil",
+    "email": "dzdrazil@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dzdra_000/grunt-swagger-models.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dzdra_000/grunt-swagger-models/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/dzdra_000/grunt-swagger-models/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "lodash": "^3.10.0",
+    "swagger-parser": "^2.5.0"
+  }
+}
