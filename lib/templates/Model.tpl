@@ -3,11 +3,17 @@ define(function(require) {
 
     var BaseModel = require('data-core').BaseModel;
 
+    <% Schema.requiredModules.forEach(function(module) {
+        print('var ' + module.name + ' = require(\'' + module.path + '\');\n    ');
+    }) %>
+
     function <%= Schema.name %>Model(data) {
         BaseModel.call(this, data);
 
         <% for (var prop in Schema.properties) { %><%
-            if (needsPropInitializer(Schema.properties[prop])) { print(propInitializer(prop, Schema.properties[prop])); }
+            if (needsPropInitializer(Schema.properties[prop])) {
+                print(propInitializer(prop, Schema.properties[prop]) + '\n        ');
+            }
         %><% } %>
     }
 

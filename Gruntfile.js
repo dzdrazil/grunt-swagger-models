@@ -34,7 +34,8 @@ module.exports = function(grunt) {
       main: {
         options: {
           swaggerFile: 'test/test.yml',
-          dest: 'test/output'
+          dest: 'test/output',
+          requireBase: 'api/'
         }
       }
     },

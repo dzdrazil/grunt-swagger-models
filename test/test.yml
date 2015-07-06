@@ -121,10 +121,12 @@ definitions:
         x-chance-type: guid
       id:
         type: integer
-        format: int64
         x-type-options:
           min: 1
           max: 1000
+      birthday:
+        type: string
+        format: dateTime
     # allOf:
     #   - $ref: '#/definitions/NewPet'
     #   - required:

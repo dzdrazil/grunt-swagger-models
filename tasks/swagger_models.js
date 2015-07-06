@@ -17,8 +17,12 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('swagger_models', 'A generator task to create an API Resource, Collection and Model class for entities from a swagger file', function() {
     var generateModel = require('../lib/generateModel');
     var generateCollection = require('../lib/generateCollection');
+    var utils = require('../lib/utils');
+    var getNameFromRef = utils.getNameFromRef;
+    var toCamelCase = utils.toCamelCase;
 
     var swaggerParser = require('swagger-parser');
+    var path = require('path');
 
     var options = this.options();
 
@@ -45,15 +49,26 @@ module.exports = function(grunt) {
 
       var $refs = metadata['$refs'];
       var $ref;
-console.log(doc.paths);
-process.exit();
-      var models = [];
-      var collections = [];
+
+      // var models = [];
+      // var collections = [];
+      var entityModules = [];
 
       for ($ref in $refs) {
-        models.push(generateModel(grunt, $ref, $refs));
-        collections.push(generateCollection(grunt, $ref, $refs));
+        entityModules.push({
+          lowerName: toCamelCase(getNameFromRef($ref)),
+          titleName: getNameFromRef($ref),
+          model: generateModel(grunt, $ref, $refs, options),
+          collection: generateCollection(grunt, $ref, $refs)
+        });
       }
+
+      entityModules.forEach(function(entity) {
+        var basePath = path.join(options.dest, options.requireBase, entity.lowerName);
+
+        grunt.file.write(path.join(basePath, entity.titleName + 'Model.js'), entity.model);
+        grunt.file.write(path.join(basePath, entity.titleName + 'Collection.js'), entity.collection);
+      });
     });
   });
 };
